@@ -1,0 +1,55 @@
+#include <16F877.h>
+
+#FUSES NOWDT              //Watch Dog Timer Kullanma
+#FUSES RC                 //Resistor/Capacitor Osilatör ile CLKOUT
+#FUSES NOPUT              //Power Up Timer Kullanma
+#FUSES PROTECT            //Rom'a Yazýlan Verilerin Okunamasýný Engelle
+#FUSES NOBROWNOUT         //Brownout Reset Kullanma
+#FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt
+#FUSES NOCPD              //Data EEPROM Korumasýz
+#FUSES NOWRT              //Program Belleði Yazmaya Açýk
+#FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý
+
+/*Programda zamanlama kullanýlacaksa*/
+#use delay(clock=4000000) 
+
+/*Port yönlendirme yapýlýyor */
+#use fast_io(b)
+#use fast_io(a)
+
+/* Portb kelimesi b portunun adresine yerleþtirilmiþtir*/
+#byte portb=6
+
+int x;
+void main()
+{
+/*Genel Pic de bölmlerinin ayarlamalarý yapýlýyor*/
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   setup_spi(SPI_SS_DISABLED);
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1);
+   setup_timer_1(T1_DISABLED);
+   setup_timer_2(T2_DISABLED,0,1);
+
+/* A pinleri hexadecimal gösterimle lojik-1 giriþ yapýlmýþtýr binary 11111111*/
+set_tris_a(0xFF);
+/*B pinleri tümüyle çýkýþ yapýlmýþtýr binary gösteri*/
+set_tris_b(0xFF);
+
+/* B portu giriþ lojik-1 yapýlýyor*/
+output_b(0x00);
+// b portun tüm pinleri enerjilendi
+
+while(1)
+{  /* a portu tüm pinleri okunuyor*/
+   x=input_a();
+   
+   x=x&0b00111111;
+   
+   /* x degeri b portuna çýkýþ olarak gönderiliyor.*/
+   portb=x;
+   
+}
+}
+
+
