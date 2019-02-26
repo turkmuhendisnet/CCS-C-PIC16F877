@@ -1,0 +1,130 @@
+CCS PCM C Compiler, Version 4.068, 61971               25-Þub-19 19:36
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Buton Ýle Led Yakma\Buton Ýle Led Yakma.lst
+
+               ROM used: 71 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 8 (2%) at main() level
+                         8 (2%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES RC                 //Resistor/Capacitor Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES PROTECT            //Rom'a Yazýlan Verilerin Okunamasýný Engelle 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................  
+.................... int1 x; 
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  BSF    03.5
+0009:  BSF    1F.0
+000A:  BSF    1F.1
+000B:  BSF    1F.2
+000C:  BCF    1F.3
+.................... /*Genel Pic de bölmlerinin ayarlamalarý yapýlýyor*/ 
+....................    setup_adc_ports(NO_ANALOGS); 
+*
+0010:  BSF    03.5
+0011:  BSF    1F.0
+0012:  BSF    1F.1
+0013:  BSF    1F.2
+0014:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0015:  BCF    03.5
+0016:  BCF    1F.0
+....................    setup_spi(SPI_SS_DISABLED); 
+0017:  BCF    14.5
+0018:  BCF    21.5
+0019:  MOVF   21,W
+001A:  BSF    03.5
+001B:  MOVWF  07
+001C:  BCF    03.5
+001D:  BSF    21.4
+001E:  MOVF   21,W
+001F:  BSF    03.5
+0020:  MOVWF  07
+0021:  BCF    03.5
+0022:  BCF    21.3
+0023:  MOVF   21,W
+0024:  BSF    03.5
+0025:  MOVWF  07
+0026:  MOVLW  01
+0027:  BCF    03.5
+0028:  MOVWF  14
+0029:  MOVLW  00
+002A:  BSF    03.5
+002B:  MOVWF  14
+....................    setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1); 
+002C:  MOVF   01,W
+002D:  ANDLW  C7
+002E:  IORLW  08
+002F:  MOVWF  01
+....................    setup_timer_1(T1_DISABLED); 
+0030:  BCF    03.5
+0031:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0032:  MOVLW  00
+0033:  MOVWF  78
+0034:  MOVWF  12
+0035:  MOVLW  00
+0036:  BSF    03.5
+0037:  MOVWF  12
+....................  
+.................... /* A pinleri a0 giriþ hariç lojik-0 çýkýþ  yapýlýyor*/ 
+.................... set_tris_a(0b00000001); 
+0038:  MOVLW  01
+0039:  MOVWF  05
+....................  
+.................... /* B pinleri komle lojik-0 çýkýþ  yapýlýyor */ 
+.................... set_tris_b(0x00); 
+003A:  MOVLW  00
+003B:  MOVWF  06
+....................  
+.................... while(1) 
+.................... { 
+.................... /* a0 pininden okunan deðer x'e atanýyor*/ 
+....................   x=input(pin_a0); 
+003C:  BCF    03.5
+003D:  BCF    20.0
+003E:  BTFSC  05.0
+003F:  BSF    20.0
+.................... /* x tek bitlik deðeri b0' atanýyor*/  
+....................   output_bit(pin_b0,x); 
+0040:  BTFSC  20.0
+0041:  GOTO   044
+0042:  BCF    06.0
+0043:  GOTO   045
+0044:  BSF    06.0
+....................   
+.................... } 
+0045:  GOTO   03D
+.................... } 
+0046:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0F0B   RC NOWDT NOPUT PROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

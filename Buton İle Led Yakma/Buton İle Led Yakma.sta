@@ -1,0 +1,45 @@
+
+ROM used: 71 (1%)
+          71 (1%) including unused fragments
+
+          0 Average locations per line
+          6 Average locations per statement
+
+RAM used: 8 (2%) at main() level
+          8 (2%) worst case
+
+Stack used: 0 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   43    12 100  Buton Ýle Led Yakma.c
+  285     0   0  ..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877.h
+----- -----
+  328    12 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     67  94   0   287  3.3  main
+
+Program metrics:
+    Functions               1
+    Statements              12
+    Comments                73
+    Volume (V)              287
+    Difficilty (D)          3.3
+    Effort to implement (E) 934
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    132
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF    67  1977  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+
