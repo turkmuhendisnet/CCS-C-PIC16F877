@@ -1,0 +1,35 @@
+#include <16F877.h>
+
+#FUSES NOWDT              //Watch Dog Timer Kullanma
+#FUSES RC                 //Resistor/Capacitor Osilatör ile CLKOUT
+#FUSES NOPUT              //Power Up Timer Kullanma
+#FUSES PROTECT            //Rom'a Yazýlan Verilerin Okunamasýný Engelle
+#FUSES NOBROWNOUT         //Brownout Reset Kullanma
+#FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt
+#FUSES NOCPD              //Data EEPROM Korumasýz
+#FUSES NOWRT              //Program Belleði Yazmaya Açýk
+#FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý
+
+/*Programda zamanlama kullanýlacaksa*/
+#use delay(clock=4000000) 
+
+/*Port yönlendirme yapýlýyor */
+#use fast_io(b)
+
+
+void main()
+{
+/*Genel Pic de bölmlerinin ayarlamalarý yapýlýyor*/
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   setup_spi(SPI_SS_DISABLED);
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_1);
+   setup_timer_1(T1_DISABLED);
+   setup_timer_2(T2_DISABLED,0,1);
+
+/* A pinleri a0 giriþ lojik-1 hariç lojik-0 çýkýþ  yapýlýyor*/
+set_tris_b(0x00);
+/* B portu giriþ lojik-1 yapýlýyor*/
+output_b(0x11);
+// b portun tüm pinleri enerjilendi
+}
