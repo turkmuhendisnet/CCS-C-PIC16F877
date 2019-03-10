@@ -1,0 +1,55 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015-016 CCP_1
+016     CCP_1_HIGH
+01B-01C CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     i
+021     main.@SCRATCH1
+022     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0012  @delay_ms1
+0004  dizi
+0029  main
+0029  @cinit
+
+Project Directory:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\-Display Uygulamasý\0-F sayýcý\
+
+Project Files:
+    DisplayUygulamsý.c
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877.h
+
+Units:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\-Display Uygulamasý\0-F sayýcý\DisplayUygulamsý.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      DisplayUygulamsý.err
+    Ext Symbols: DisplayUygulamsý.esym
+    INHX8:       DisplayUygulamsý.hex
+    Symbols:     DisplayUygulamsý.sym
+    List:        DisplayUygulamsý.lst
+    Debug/COFF:  DisplayUygulamsý.cof
+    Project:     DisplayUygulamsý.PJT
+    Call Tree:   DisplayUygulamsý.tre
+    Statistics:  DisplayUygulamsý.sta

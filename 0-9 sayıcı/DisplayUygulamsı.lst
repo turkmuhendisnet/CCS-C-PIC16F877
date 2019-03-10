@@ -1,0 +1,145 @@
+CCS PCM C Compiler, Version 4.068, 61971               10-Mar-19 21:27
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\-Display Uygulamasý\0-F sayýcý\DisplayUygulamsý.lst
+
+               ROM used: 91 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 8 (2%) at main() level
+                         9 (2%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   029
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+0012:  MOVLW  22
+0013:  MOVWF  04
+0014:  BCF    03.7
+0015:  MOVF   00,W
+0016:  BTFSC  03.2
+0017:  GOTO   026
+0018:  MOVLW  01
+0019:  MOVWF  78
+001A:  CLRF   77
+001B:  DECFSZ 77,F
+001C:  GOTO   01B
+001D:  DECFSZ 78,F
+001E:  GOTO   01A
+001F:  MOVLW  4A
+0020:  MOVWF  77
+0021:  DECFSZ 77,F
+0022:  GOTO   021
+0023:  GOTO   024
+0024:  DECFSZ 00,F
+0025:  GOTO   018
+0026:  BCF    0A.3
+0027:  BCF    0A.4
+0028:  GOTO   055 (RETURN)
+....................  
+.................... #define buton pin_A0 
+....................  
+.................... #use fast_io(c) 
+.................... #use fast_io(b) 
+....................  
+.................... int i; 
+.................... /* Dizi tanýmlamasý Yapýlýyor*/ 
+.................... const int dizi[10]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7C,0x07,0x7F,0x6F}; 
+....................  
+.................... void main() 
+.................... { 
+0029:  CLRF   04
+002A:  BCF    03.7
+002B:  MOVLW  1F
+002C:  ANDWF  03,F
+002D:  BSF    03.5
+002E:  BSF    1F.0
+002F:  BSF    1F.1
+0030:  BSF    1F.2
+0031:  BCF    1F.3
+....................   /* PIC  ayarlarý yaðpýlýyor*/ 
+....................    setup_psp(PSP_DISABLED); 
+0032:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+0033:  BSF    1F.0
+0034:  BSF    1F.1
+0035:  BSF    1F.2
+0036:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0037:  BCF    03.5
+0038:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+0039:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+003A:  MOVLW  00
+003B:  MOVWF  78
+003C:  MOVWF  12
+003D:  MOVLW  00
+003E:  BSF    03.5
+003F:  MOVWF  12
+....................    setup_CCP1(CCP_OFF); 
+0040:  BCF    03.5
+0041:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+0042:  CLRF   1D
+....................     
+.................... /* b portu çýkýþ olarak yönlendiriliyor*/  
+.................... set_tris_b(0x00); 
+0043:  BSF    03.5
+0044:  MOVWF  06
+....................  
+.................... /* b portunun çýkýþlarý lojik-0 yapýlýyor*/ 
+.................... output_b(0x00); 
+0045:  BCF    03.5
+0046:  CLRF   06
+....................  
+....................    while(1) 
+....................    { 
+....................          for(i=0;i<11;i++) 
+0047:  CLRF   20
+0048:  MOVF   20,W
+0049:  SUBLW  0A
+004A:  BTFSS  03.0
+004B:  GOTO   059
+....................             { 
+....................                output_b(dizi[i]); 
+004C:  MOVF   20,W
+004D:  CALL   004
+004E:  MOVWF  21
+004F:  MOVWF  06
+....................                delay_ms(500); 
+0050:  MOVLW  02
+0051:  MOVWF  21
+0052:  MOVLW  FA
+0053:  MOVWF  22
+0054:  GOTO   012
+0055:  DECFSZ 21,F
+0056:  GOTO   052
+....................            } 
+0057:  INCF   20,F
+0058:  GOTO   048
+....................    } 
+0059:  GOTO   047
+.................... } 
+....................  
+005A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

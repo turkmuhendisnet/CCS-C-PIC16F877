@@ -1,0 +1,47 @@
+
+ROM used: 91 (1%)
+          91 (1%) including unused fragments
+
+          0 Average locations per line
+          6 Average locations per statement
+
+RAM used: 8 (2%) at main() level
+          9 (2%) worst case
+
+Stack used: 1 worst case (out of 8 total available)
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   51    15 100  DisplayUygulamsý.c
+  285     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877.h
+----- -----
+  336    15 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     23  25   1             @delay_ms1
+0     14  15   0             @const55
+0     50  55   1   374  4.7  main
+
+Program metrics:
+    Functions               1
+    Statements              15
+    Comments                72
+    Volume (V)              379
+    Difficilty (D)          4.4
+    Effort to implement (E) 1678
+    Time to implement (T)   2 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    123
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF    87  1957  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+
