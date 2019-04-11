@@ -1,0 +1,57 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015-016 CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     i
+021     j
+022-02B dizi
+02C     @TRIS_C
+02D     main.@SCRATCH1
+02E     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0004  @delay_ms1
+001B  main
+001B  @cinit
+
+Project Directory:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\741164 Entegresi\
+
+Project Files:
+    74164Entegre.c
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877.h
+
+Units:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\741164 Entegresi\74164Entegre.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      74164Entegre.err
+    Ext Symbols: 74164Entegre.esym
+    INHX8:       74164Entegre.hex
+    Symbols:     74164Entegre.sym
+    List:        74164Entegre.lst
+    Debug/COFF:  74164Entegre.cof
+    Project:     74164Entegre.PJT
+    Call Tree:   74164Entegre.tre
+    Statistics:  74164Entegre.sta

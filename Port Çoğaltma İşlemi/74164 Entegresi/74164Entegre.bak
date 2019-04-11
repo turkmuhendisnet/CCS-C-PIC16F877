@@ -1,0 +1,59 @@
+#include <16F877.h>
+
+#FUSES NOWDT              //Watch Dog Timer Kullanma
+#FUSES XT                 //Kristal  Osilatör ile CLKOUT
+#FUSES NOPUT              //Power Up Timer Kullanma
+#FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir
+#FUSES NOBROWNOUT         //Brownout Reset Kullanma
+#FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt
+#FUSES NOCPD              //Data EEPROM Korumasýz
+#FUSES NOWRT              //Program Belleði Yazmaya Açýk
+#FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý
+
+#use delay(clock=4000000)
+
+#use fast_io(b)
+
+#define data pin_b0
+#define clock pin_b1
+
+int i,j;
+
+int dizi[10]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7C,0x07,0x7F,0x6F};
+void main()
+{
+   setup_psp(PSP_DISABLED);
+   setup_adc_ports(NO_ANALOGS);
+   setup_adc(ADC_OFF);
+   setup_timer_1(T1_DISABLED);
+   setup_timer_2(T2_DISABLED,0,1);
+   setup_CCP1(CCP_OFF);
+   setup_CCP2(CCP_OFF); 
+   
+   set_tris_b(0x00);
+   
+   output_b(0x00);
+   
+   while(1)
+   {
+      for(i=0;i<10;i++) // 10 elemanlý dizinin bütün elamanlarýn gezicektir.
+       {
+         for(j=0;j<8;j++)// 0 dan 8. bitine kadar kontrol edilmektedir.
+         {
+            output_bit(data,bit_test(dizi[i],j));//bit_test(dizi[i],j) ile dizinin i. elemanýn j. biti öðrenilmiþtir.
+                                       // oda pin B0 gönderilmiþtir.
+         output_high(clock);// clock 1
+            output_low(clock);// clock 0 yapýlmýþ ve 1 pulse verilmiþtir.
+            
+            /* i=0 da j=0,1,2,3,4,5,6,7 ye sayarken  data=pin b0'a
+            bit_test(diz[i],j) komutu ile j dizinin her elamanýnýn her bitini gezecek ve 
+            8. turun her sonunda 741164'e dizinin içinde ki sayýlarý tek tek 
+            yollacaktýr.*/
+         }
+         
+         delay_ms(500);
+       }
+   }
+}
+
+

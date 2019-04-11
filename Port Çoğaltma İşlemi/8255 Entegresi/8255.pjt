@@ -1,0 +1,32 @@
+[Directories]
+Include=C:\Program Files (x86)\PICC\devices\;C:\Program Files (x86)\PICC\drivers\;
+Library=
+LinkerScript=
+[defines]
+enabled=0
+D1=
+V1=
+[fileformats]
+forcecoff=0
+debug=4
+error=2
+object=0
+list=0
+scratch=0
+sta=1
+tre=1
+allerrors=1
+allwarnings=1
+stayupne=3
+stayupoe=0
+[PROJECT]
+Target=portcogaltma.hex
+Development_Mode=
+Processor=0x877F
+Processor_Text=PIC16F877
+ToolSuite=CCS
+[Target Data]
+BuildTool=C-COMPILER
+[Opened Files]
+1=C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\8255 Entegresi\8255.c
+2=

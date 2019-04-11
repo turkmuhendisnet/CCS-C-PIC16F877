@@ -1,0 +1,57 @@
+004     @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015-016 CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B-01C CCP_2
+01C     CCP_2_HIGH
+020     data
+021     @TRIS_C
+022     _8255_okuma.x
+022     _8255_yazma.x
+023     _8255_yazma.bilgi
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+07B     @SCRATCH
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+0004  _8255_yazma
+0040  _8255_okuma
+0086  MAIN
+0086  @cinit
+
+Project Directory:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\8255 Entegresi\
+
+Project Files:
+    8255.c
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\16F877.h
+
+Units:
+    C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\8255 Entegresi\8255.c (main)
+
+Compiler Settings:
+    Processor:      PIC16F877
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      8255.err
+    Ext Symbols: 8255.esym
+    INHX8:       8255.hex
+    Symbols:     8255.sym
+    List:        8255.lst
+    Debug/COFF:  8255.cof
+    Project:     8255.PJT
+    Call Tree:   8255.tre
+    Statistics:  8255.sta

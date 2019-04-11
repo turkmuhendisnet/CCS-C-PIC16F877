@@ -1,0 +1,215 @@
+CCS PCM C Compiler, Version 4.068, 61971               05-Mar-19 18:32
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\741164 Entegresi\74164Entegre.lst
+
+               ROM used: 137 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 20 (5%) at main() level
+                         21 (6%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01B
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+*
+0004:  MOVLW  2E
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  BCF    0A.3
+0019:  BCF    0A.4
+001A:  GOTO   083 (RETURN)
+....................  
+.................... #use fast_io(b) 
+....................  
+.................... #define data pin_b0 
+.................... #define clock pin_b1 
+....................  
+.................... int i,j; 
+....................  
+.................... int dizi[10]={0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7C,0x07,0x7F,0x6F}; 
+*
+0024:  MOVLW  3F
+0025:  BCF    03.5
+0026:  MOVWF  22
+0027:  MOVLW  06
+0028:  MOVWF  23
+0029:  MOVLW  5B
+002A:  MOVWF  24
+002B:  MOVLW  4F
+002C:  MOVWF  25
+002D:  MOVLW  66
+002E:  MOVWF  26
+002F:  MOVLW  6D
+0030:  MOVWF  27
+0031:  MOVLW  7C
+0032:  MOVWF  28
+0033:  MOVLW  07
+0034:  MOVWF  29
+0035:  MOVLW  7F
+0036:  MOVWF  2A
+0037:  MOVLW  6F
+0038:  MOVWF  2B
+.................... void main() 
+.................... { 
+*
+001B:  CLRF   04
+001C:  BCF    03.7
+001D:  MOVLW  1F
+001E:  ANDWF  03,F
+001F:  BSF    03.5
+0020:  BSF    1F.0
+0021:  BSF    1F.1
+0022:  BSF    1F.2
+0023:  BCF    1F.3
+....................    setup_psp(PSP_DISABLED); 
+*
+003B:  BSF    03.5
+003C:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+003D:  BSF    1F.0
+003E:  BSF    1F.1
+003F:  BSF    1F.2
+0040:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0041:  BCF    03.5
+0042:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+0043:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+0044:  MOVLW  00
+0045:  MOVWF  78
+0046:  MOVWF  12
+0047:  MOVLW  00
+0048:  BSF    03.5
+0049:  MOVWF  12
+....................    setup_CCP1(CCP_OFF); 
+004A:  BCF    03.5
+004B:  BSF    2C.2
+004C:  MOVF   2C,W
+004D:  BSF    03.5
+004E:  MOVWF  07
+004F:  BCF    03.5
+0050:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+0051:  BSF    2C.1
+0052:  MOVF   2C,W
+0053:  BSF    03.5
+0054:  MOVWF  07
+0055:  BCF    03.5
+0056:  CLRF   1D
+....................     
+....................    set_tris_b(0x00); 
+0057:  MOVLW  00
+0058:  BSF    03.5
+0059:  MOVWF  06
+....................     
+....................    output_b(0x00); 
+005A:  BCF    03.5
+005B:  CLRF   06
+....................     
+....................    while(1) 
+....................    { 
+....................       for(i=0;i<10;i++) // 10 elemanlý dizinin bütün elamanlarýn gezicektir. 
+005C:  CLRF   20
+005D:  MOVF   20,W
+005E:  SUBLW  09
+005F:  BTFSS  03.0
+0060:  GOTO   087
+....................        { 
+....................          for(j=0;j<8;j++)// 0 dan 8. bitine kadar kontrol edilmektedir. 
+0061:  CLRF   21
+0062:  MOVF   21,W
+0063:  SUBLW  07
+0064:  BTFSS  03.0
+0065:  GOTO   07E
+....................          { 
+....................             output_bit(data,bit_test(dizi[i],j));//bit_test(dizi[i],j) ile dizinin i. elemanýn j. biti öðrenilmiþtir. 
+0066:  MOVLW  22
+0067:  ADDWF  20,W
+0068:  MOVWF  04
+0069:  BCF    03.7
+006A:  MOVF   00,W
+006B:  MOVWF  2D
+006C:  MOVWF  77
+006D:  MOVF   21,W
+006E:  MOVWF  78
+006F:  BTFSC  03.2
+0070:  GOTO   075
+0071:  BCF    03.0
+0072:  RRF    77,F
+0073:  DECFSZ 78,F
+0074:  GOTO   071
+0075:  BTFSC  77.0
+0076:  GOTO   079
+0077:  BCF    06.0
+0078:  GOTO   07A
+0079:  BSF    06.0
+....................                                        // oda pin B0 gönderilmiþtir. 
+....................          output_high(clock);// clock 1 
+007A:  BSF    06.1
+....................             output_low(clock);// clock 0 yapýlmýþ ve 1 pulse verilmiþtir. 
+007B:  BCF    06.1
+....................              
+....................             /* i=0 da j=0,1,2,3,4,5,6,7 ye sayarken  data=pin b0'a  
+....................             bit_test(diz[i],j) komutu ile her pulse'de j dizinin her elamanýnýn her bitini gezecek ve  
+....................             8. turun her sonunda 741164'e dizinin içindebir elemanýný tamamlamýþ olacaktýr i=10 olduðunda bütün elamanlar yazýlmýþ olur*/ 
+....................          } 
+007C:  INCF   21,F
+007D:  GOTO   062
+....................           
+....................          delay_ms(500); 
+007E:  MOVLW  02
+007F:  MOVWF  2D
+0080:  MOVLW  FA
+0081:  MOVWF  2E
+0082:  GOTO   004
+0083:  DECFSZ 2D,F
+0084:  GOTO   080
+....................        } 
+0085:  INCF   20,F
+0086:  GOTO   05D
+....................    } 
+0087:  GOTO   05C
+.................... } 
+....................  
+....................  
+0088:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

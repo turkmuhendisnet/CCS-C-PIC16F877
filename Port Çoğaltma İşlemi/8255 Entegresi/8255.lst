@@ -1,0 +1,308 @@
+CCS PCM C Compiler, Version 4.068, 61971               05-Mar-19 14:54
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Port Çoðaltma\8255 Entegresi\8255.lst
+
+               ROM used: 195 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 8 (2%) at main() level
+                         10 (3%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   086
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+....................  
+.................... #use standard_io(a) 
+.................... #use standard_io(b) 
+....................  
+....................  
+.................... int data; 
+....................  
+.................... /* Yazma  Fonksiyonu*/ 
+.................... void _8255_yazma (char x, char bilgi) 
+.................... { 
+....................  
+....................    switch(x) 
+....................    { 
+*
+0004:  MOVF   22,W
+0005:  XORLW  6B
+0006:  BTFSC  03.2
+0007:  GOTO   012
+0008:  XORLW  0A
+0009:  BTFSC  03.2
+000A:  GOTO   01D
+000B:  XORLW  03
+000C:  BTFSC  03.2
+000D:  GOTO   028
+000E:  XORLW  01
+000F:  BTFSC  03.2
+0010:  GOTO   033
+0011:  GOTO   03E
+....................       case 'k': 
+....................          output_a(0b00001101); 
+0012:  BSF    03.5
+0013:  CLRF   05
+0014:  MOVLW  0D
+0015:  BCF    03.5
+0016:  MOVWF  05
+....................          output_b(bilgi); 
+0017:  BSF    03.5
+0018:  CLRF   06
+0019:  BCF    03.5
+001A:  MOVF   23,W
+001B:  MOVWF  06
+....................          break; 
+001C:  GOTO   03F
+....................       case 'a': 
+....................          output_a(0b00000001); 
+001D:  BSF    03.5
+001E:  CLRF   05
+001F:  MOVLW  01
+0020:  BCF    03.5
+0021:  MOVWF  05
+....................          output_b(bilgi); 
+0022:  BSF    03.5
+0023:  CLRF   06
+0024:  BCF    03.5
+0025:  MOVF   23,W
+0026:  MOVWF  06
+....................          break; 
+0027:  GOTO   03F
+....................       case 'b': 
+....................          output_a(0b00000101); 
+0028:  BSF    03.5
+0029:  CLRF   05
+002A:  MOVLW  05
+002B:  BCF    03.5
+002C:  MOVWF  05
+....................          output_b(bilgi); 
+002D:  BSF    03.5
+002E:  CLRF   06
+002F:  BCF    03.5
+0030:  MOVF   23,W
+0031:  MOVWF  06
+....................          break; 
+0032:  GOTO   03F
+....................       case 'c': 
+....................          output_a(0b00001001); 
+0033:  BSF    03.5
+0034:  CLRF   05
+0035:  MOVLW  09
+0036:  BCF    03.5
+0037:  MOVWF  05
+....................          output_b(bilgi); 
+0038:  BSF    03.5
+0039:  CLRF   06
+003A:  BCF    03.5
+003B:  MOVF   23,W
+003C:  MOVWF  06
+....................          break; 
+003D:  GOTO   03F
+....................       default: 
+....................          break; 
+003E:  GOTO   03F
+....................    }    
+.................... } 
+003F:  RETLW  00
+.................... /*Okuma Fonksiyonu*/ 
+.................... int _8255_okuma(char x) 
+.................... { 
+....................    switch(x) 
+....................    { 
+0040:  MOVF   22,W
+0041:  XORLW  6B
+0042:  BTFSC  03.2
+0043:  GOTO   04E
+0044:  XORLW  0A
+0045:  BTFSC  03.2
+0046:  GOTO   05B
+0047:  XORLW  03
+0048:  BTFSC  03.2
+0049:  GOTO   068
+004A:  XORLW  01
+004B:  BTFSC  03.2
+004C:  GOTO   075
+004D:  GOTO   082
+....................     
+....................       case 'k': 
+....................          output_a(0b00001110); 
+004E:  BSF    03.5
+004F:  CLRF   05
+0050:  MOVLW  0E
+0051:  BCF    03.5
+0052:  MOVWF  05
+....................          return(input_b()); 
+0053:  MOVLW  FF
+0054:  BSF    03.5
+0055:  MOVWF  06
+0056:  BCF    03.5
+0057:  MOVF   06,W
+0058:  MOVWF  78
+0059:  GOTO   083
+....................          break; 
+005A:  GOTO   083
+....................       case 'a': 
+....................          output_a(0b00000010); 
+005B:  BSF    03.5
+005C:  CLRF   05
+005D:  MOVLW  02
+005E:  BCF    03.5
+005F:  MOVWF  05
+....................          return(input_b()); 
+0060:  MOVLW  FF
+0061:  BSF    03.5
+0062:  MOVWF  06
+0063:  BCF    03.5
+0064:  MOVF   06,W
+0065:  MOVWF  78
+0066:  GOTO   083
+....................          break; 
+0067:  GOTO   083
+....................       case 'b': 
+....................          output_a(0b00000110); 
+0068:  BSF    03.5
+0069:  CLRF   05
+006A:  MOVLW  06
+006B:  BCF    03.5
+006C:  MOVWF  05
+....................          return(input_b()); 
+006D:  MOVLW  FF
+006E:  BSF    03.5
+006F:  MOVWF  06
+0070:  BCF    03.5
+0071:  MOVF   06,W
+0072:  MOVWF  78
+0073:  GOTO   083
+....................          break; 
+0074:  GOTO   083
+....................       case 'c': 
+....................          output_a(0b00001010); 
+0075:  BSF    03.5
+0076:  CLRF   05
+0077:  MOVLW  0A
+0078:  BCF    03.5
+0079:  MOVWF  05
+....................          return(input_b()); 
+007A:  MOVLW  FF
+007B:  BSF    03.5
+007C:  MOVWF  06
+007D:  BCF    03.5
+007E:  MOVF   06,W
+007F:  MOVWF  78
+0080:  GOTO   083
+....................          break; 
+0081:  GOTO   083
+....................       default: 
+....................          break; 
+0082:  GOTO   083
+....................    } 
+.................... } 
+0083:  BCF    0A.3
+0084:  BCF    0A.4
+0085:  GOTO   0BA (RETURN)
+....................  
+.................... /* Ana fonksiyon*/ 
+.................... void main() 
+.................... { 
+0086:  CLRF   04
+0087:  BCF    03.7
+0088:  MOVLW  1F
+0089:  ANDWF  03,F
+008A:  BSF    03.5
+008B:  BSF    1F.0
+008C:  BSF    1F.1
+008D:  BSF    1F.2
+008E:  BCF    1F.3
+....................    setup_psp(PSP_DISABLED); 
+*
+0092:  BSF    03.5
+0093:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+0094:  BSF    1F.0
+0095:  BSF    1F.1
+0096:  BSF    1F.2
+0097:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+0098:  BCF    03.5
+0099:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+009A:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+009B:  MOVLW  00
+009C:  MOVWF  78
+009D:  MOVWF  12
+009E:  MOVLW  00
+009F:  BSF    03.5
+00A0:  MOVWF  12
+....................    setup_CCP1(CCP_OFF); 
+00A1:  BCF    03.5
+00A2:  BSF    21.2
+00A3:  MOVF   21,W
+00A4:  BSF    03.5
+00A5:  MOVWF  07
+00A6:  BCF    03.5
+00A7:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+00A8:  BSF    21.1
+00A9:  MOVF   21,W
+00AA:  BSF    03.5
+00AB:  MOVWF  07
+00AC:  BCF    03.5
+00AD:  CLRF   1D
+....................     
+....................    _8255_yazma('k',0b10001001); 
+00AE:  MOVLW  6B
+00AF:  MOVWF  22
+00B0:  MOVLW  89
+00B1:  MOVWF  23
+00B2:  CALL   004
+....................    _8255_yazma('a',0x00); 
+00B3:  MOVLW  61
+00B4:  MOVWF  22
+00B5:  CLRF   23
+00B6:  CALL   004
+....................     
+....................    while(1) 
+....................    { 
+....................       data=(_8255_okuma('c')); 
+00B7:  MOVLW  63
+00B8:  MOVWF  22
+00B9:  GOTO   040
+00BA:  MOVF   78,W
+00BB:  MOVWF  20
+....................       _8255_yazma('a',data); 
+00BC:  MOVLW  61
+00BD:  MOVWF  22
+00BE:  MOVF   20,W
+00BF:  MOVWF  23
+00C0:  CALL   004
+....................    } 
+00C1:  GOTO   0B7
+....................   
+.................... } 
+....................  
+....................  
+00C2:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG
