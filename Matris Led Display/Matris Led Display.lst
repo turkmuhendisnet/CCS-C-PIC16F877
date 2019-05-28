@@ -1,0 +1,328 @@
+CCS PCM C Compiler, Version 4.068, 61971               06-Mar-19 11:19
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\Matris Led Display\Matris Led Display.lst
+
+               ROM used: 232 words (3%)
+                         Largest free fragment is 2048
+               RAM used: 41 (11%) at main() level
+                         48 (13%) worst case
+               Stack:    3 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   065
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+*
+004A:  MOVLW  49
+004B:  MOVWF  04
+004C:  BCF    03.7
+004D:  MOVF   00,W
+004E:  BTFSC  03.2
+004F:  GOTO   05E
+0050:  MOVLW  01
+0051:  MOVWF  78
+0052:  CLRF   77
+0053:  DECFSZ 77,F
+0054:  GOTO   053
+0055:  DECFSZ 78,F
+0056:  GOTO   052
+0057:  MOVLW  4A
+0058:  MOVWF  77
+0059:  DECFSZ 77,F
+005A:  GOTO   059
+005B:  GOTO   05C
+005C:  DECFSZ 00,F
+005D:  GOTO   050
+....................  
+.................... #use fast_io(b) 
+.................... #use fast_io(c) 
+....................  
+.................... int   A[]={0x03,0x75,0x76,0x75,0x03}, 
+*
+006E:  MOVLW  03
+006F:  BCF    03.5
+0070:  MOVWF  20
+0071:  MOVLW  75
+0072:  MOVWF  21
+0073:  MOVLW  76
+0074:  MOVWF  22
+0075:  MOVLW  75
+0076:  MOVWF  23
+0077:  MOVLW  03
+0078:  MOVWF  24
+....................      B[]={0x00,0x36,0x36,0x36,0x49}, 
+0079:  CLRF   25
+007A:  MOVLW  36
+007B:  MOVWF  26
+007C:  MOVWF  27
+007D:  MOVWF  28
+007E:  MOVLW  49
+007F:  MOVWF  29
+....................      C[]={0x41,0x3E,0x3E,0x3E,0x5D}, 
+0080:  MOVLW  41
+0081:  MOVWF  2A
+0082:  MOVLW  3E
+0083:  MOVWF  2B
+0084:  MOVWF  2C
+0085:  MOVWF  2D
+0086:  MOVLW  5D
+0087:  MOVWF  2E
+....................      D[]={0x00,0x3E,0x3E,0x3E,0x41}, 
+0088:  CLRF   2F
+0089:  MOVLW  3E
+008A:  MOVWF  30
+008B:  MOVWF  31
+008C:  MOVWF  32
+008D:  MOVLW  41
+008E:  MOVWF  33
+....................         E[]={0x00,0xB6,0xB6,0xB6,0xBE}, 
+008F:  CLRF   34
+0090:  MOVLW  B6
+0091:  MOVWF  35
+0092:  MOVWF  36
+0093:  MOVWF  37
+0094:  MOVLW  BE
+0095:  MOVWF  38
+....................    arti[]={0x77,0x77,0x41,0x77,0x77}, 
+0096:  MOVLW  77
+0097:  MOVWF  39
+0098:  MOVWF  3A
+0099:  MOVLW  41
+009A:  MOVWF  3B
+009B:  MOVLW  77
+009C:  MOVWF  3C
+009D:  MOVWF  3D
+.................... cift_ok[]={0x6B,0x5D,0x00,0x5D,0x6B}; 
+009E:  MOVLW  6B
+009F:  MOVWF  3E
+00A0:  MOVLW  5D
+00A1:  MOVWF  3F
+00A2:  CLRF   40
+00A3:  MOVWF  41
+00A4:  MOVLW  6B
+00A5:  MOVWF  42
+....................  
+.................... int sutunsec(int s) 
+.................... { 
+....................    switch(s) 
+....................    { 
+*
+0004:  MOVF   49,W
+0005:  ADDLW  FB
+0006:  BTFSC  03.0
+0007:  GOTO   01E
+0008:  ADDLW  05
+0009:  GOTO   021
+....................       case 0: return(0x10);break; 
+000A:  MOVLW  10
+000B:  MOVWF  78
+000C:  GOTO   01E
+000D:  GOTO   01E
+....................       case 1: return(0x08);break; 
+000E:  MOVLW  08
+000F:  MOVWF  78
+0010:  GOTO   01E
+0011:  GOTO   01E
+....................       case 2: return(0x04);break; 
+0012:  MOVLW  04
+0013:  MOVWF  78
+0014:  GOTO   01E
+0015:  GOTO   01E
+....................       case 3: return(0x02);break; 
+0016:  MOVLW  02
+0017:  MOVWF  78
+0018:  GOTO   01E
+0019:  GOTO   01E
+....................       case 4: return(0x01);break; 
+001A:  MOVLW  01
+001B:  MOVWF  78
+001C:  GOTO   01E
+001D:  GOTO   01E
+....................    } 
+.................... } 
+001E:  BCF    0A.3
+001F:  BCF    0A.4
+0020:  GOTO   03D (RETURN)
+.................... void matris_karakter_gonder(char harf[],int tekrar) 
+.................... { 
+....................    int i,j,k; 
+....................    for(i=1;i<tekrar;i++) 
+*
+002A:  MOVLW  01
+002B:  MOVWF  46
+002C:  MOVF   45,W
+002D:  SUBWF  46,W
+002E:  BTFSC  03.0
+002F:  GOTO   064
+....................    { 
+....................       for(k=0;k<10;k++) 
+0030:  CLRF   48
+0031:  MOVF   48,W
+0032:  SUBLW  09
+0033:  BTFSS  03.0
+0034:  GOTO   062
+....................       { 
+....................          for(j=0;j<5;j++) 
+0035:  CLRF   47
+0036:  MOVF   47,W
+0037:  SUBLW  04
+0038:  BTFSS  03.0
+0039:  GOTO   060
+....................          { 
+....................             output_c(sutunsec(j)); 
+003A:  MOVF   47,W
+003B:  MOVWF  49
+003C:  GOTO   004
+003D:  MOVF   78,W
+003E:  MOVWF  07
+....................             output_b(harf[j]); 
+003F:  MOVF   47,W
+0040:  ADDWF  43,W
+0041:  MOVWF  04
+0042:  BCF    03.7
+0043:  BTFSC  44.0
+0044:  BSF    03.7
+0045:  MOVF   00,W
+0046:  MOVWF  49
+0047:  MOVWF  06
+....................             delay_ms(1);    
+0048:  MOVLW  01
+0049:  MOVWF  49
+....................          } 
+*
+005E:  INCF   47,F
+005F:  GOTO   036
+....................  
+....................       } 
+0060:  INCF   48,F
+0061:  GOTO   031
+....................    } 
+0062:  INCF   46,F
+0063:  GOTO   02C
+....................     
+.................... }    
+0064:  RETLW  00
+.................... void main() 
+.................... { 
+0065:  CLRF   04
+0066:  BCF    03.7
+0067:  MOVLW  1F
+0068:  ANDWF  03,F
+0069:  BSF    03.5
+006A:  BSF    1F.0
+006B:  BSF    1F.1
+006C:  BSF    1F.2
+006D:  BCF    1F.3
+....................    setup_psp(PSP_DISABLED); 
+*
+00A6:  BSF    03.5
+00A7:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+00A8:  BSF    1F.0
+00A9:  BSF    1F.1
+00AA:  BSF    1F.2
+00AB:  BCF    1F.3
+....................    setup_adc(ADC_OFF); 
+00AC:  BCF    03.5
+00AD:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+00AE:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+00AF:  MOVLW  00
+00B0:  MOVWF  78
+00B1:  MOVWF  12
+00B2:  MOVLW  00
+00B3:  BSF    03.5
+00B4:  MOVWF  12
+....................    setup_CCP1(CCP_OFF); 
+00B5:  BCF    03.5
+00B6:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+00B7:  CLRF   1D
+....................     
+....................    set_tris_b(0x00); 
+00B8:  BSF    03.5
+00B9:  MOVWF  06
+....................    set_tris_c(0x00); 
+00BA:  MOVWF  07
+....................     
+....................  
+....................    while(1) 
+....................    { 
+....................    matris_karakter_gonder(A,20); 
+00BB:  BCF    03.5
+00BC:  CLRF   44
+00BD:  MOVLW  20
+00BE:  MOVWF  43
+00BF:  MOVLW  14
+00C0:  MOVWF  45
+00C1:  CALL   02A
+....................    matris_karakter_gonder(B,20); 
+00C2:  CLRF   44
+00C3:  MOVLW  25
+00C4:  MOVWF  43
+00C5:  MOVLW  14
+00C6:  MOVWF  45
+00C7:  CALL   02A
+....................    matris_karakter_gonder(C,20); 
+00C8:  CLRF   44
+00C9:  MOVLW  2A
+00CA:  MOVWF  43
+00CB:  MOVLW  14
+00CC:  MOVWF  45
+00CD:  CALL   02A
+....................    matris_karakter_gonder(D,20); 
+00CE:  CLRF   44
+00CF:  MOVLW  2F
+00D0:  MOVWF  43
+00D1:  MOVLW  14
+00D2:  MOVWF  45
+00D3:  CALL   02A
+....................    matris_karakter_gonder(E,20); 
+00D4:  CLRF   44
+00D5:  MOVLW  34
+00D6:  MOVWF  43
+00D7:  MOVLW  14
+00D8:  MOVWF  45
+00D9:  CALL   02A
+....................    matris_karakter_gonder(arti,20); 
+00DA:  CLRF   44
+00DB:  MOVLW  39
+00DC:  MOVWF  43
+00DD:  MOVLW  14
+00DE:  MOVWF  45
+00DF:  CALL   02A
+....................    matris_karakter_gonder(cift_ok,20); 
+00E0:  CLRF   44
+00E1:  MOVLW  3E
+00E2:  MOVWF  43
+00E3:  MOVLW  14
+00E4:  MOVWF  45
+00E5:  CALL   02A
+....................    } 
+00E6:  GOTO   0BC
+.................... } 
+....................  
+....................  
+00E7:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

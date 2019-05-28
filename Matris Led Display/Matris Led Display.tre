@@ -1,0 +1,31 @@
+ÀÄMatris Led Display
+   ÀÄMAIN  0/131  Ram=0
+      ÃÄ??0??
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÃÄmatris_karakter_gonder  0/59  Ram=7
+      ³  ÃÄsutunsec  0/29  Ram=1
+      ³  ³  ÀÄ@goto10035  0/9  Ram=0
+      ³  ÀÄ@delay_ms1  (Inline)  Ram=1
+      ÀÄmatris_karakter_gonder  0/59  Ram=7
+         ÃÄsutunsec  0/29  Ram=1
+         ³  ÀÄ@goto10035  0/9  Ram=0
+         ÀÄ@delay_ms1  (Inline)  Ram=1
