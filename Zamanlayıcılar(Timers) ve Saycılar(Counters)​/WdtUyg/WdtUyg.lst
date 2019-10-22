@@ -1,0 +1,136 @@
+CCS PCM C Compiler, Version 4.068, 61971               13-Mar-19 16:05
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\-Zamnlayýcýlar\Watchdog Timer\WdtUyg\WdtUyg.lst
+
+               ROM used: 71 words (1%)
+                         Largest free fragment is 2048
+               RAM used: 7 (2%) at main() level
+                         7 (2%) worst case
+               Stack:    0 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES WDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+....................  
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+....................  
+....................  
+.................... void main() 
+.................... { 
+*
+0004:  CLRF   04
+0005:  BCF    03.7
+0006:  MOVLW  1F
+0007:  ANDWF  03,F
+0008:  BSF    03.5
+0009:  BSF    1F.0
+000A:  BSF    1F.1
+000B:  BSF    1F.2
+000C:  BCF    1F.3
+....................    setup_psp(PSP_DISABLED); 
+*
+0010:  BSF    03.5
+0011:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+0012:  BSF    1F.0
+0013:  BSF    1F.1
+0014:  BSF    1F.2
+0015:  BCF    1F.3
+....................    setup_adc(ADC_OFF);  
+0016:  BCF    03.5
+0017:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+0018:  CLRF   10
+....................    setup_CCP1(CCP_OFF); 
+0019:  BSF    20.2
+001A:  MOVF   20,W
+001B:  BSF    03.5
+001C:  MOVWF  07
+001D:  BCF    03.5
+001E:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+001F:  BSF    20.1
+0020:  MOVF   20,W
+0021:  BSF    03.5
+0022:  MOVWF  07
+0023:  BCF    03.5
+0024:  CLRF   1D
+....................     
+....................    set_tris_b(0x00); 
+0025:  MOVLW  00
+0026:  BSF    03.5
+0027:  MOVWF  06
+....................    set_tris_a(0x01); 
+0028:  MOVLW  01
+0029:  MOVWF  05
+....................     
+....................    output_b(0x00); 
+002A:  BCF    03.5
+002B:  CLRF   06
+....................     
+....................     
+....................     
+....................    setup_WDT(WDT_2304MS); 
+002C:  MOVLW  0F
+002D:  MOVWF  77
+002E:  MOVLW  07
+002F:  CLRF   01
+0030:  MOVLW  81
+0031:  MOVWF  04
+0032:  BCF    03.7
+0033:  MOVF   00,W
+0034:  ANDLW  F0
+0035:  IORLW  07
+0036:  MOVWF  00
+0037:  CLRWDT
+0038:  MOVF   00,W
+0039:  ANDLW  F7
+003A:  BTFSC  77.3
+003B:  ANDLW  F0
+003C:  IORWF  77,W
+003D:  MOVWF  00
+....................     
+....................    while(1) 
+....................    { 
+....................       output_toggle(pin_b0); 
+003E:  MOVLW  01
+003F:  XORWF  06,F
+....................        
+....................          while(input(pin_a0)) 
+....................             restart_wdt(); 
+0040:  BTFSS  05.0
+0041:  GOTO   044
+0042:  CLRWDT
+0043:  GOTO   040
+....................              
+....................       sleep(); 
+0044:  SLEEP
+....................    } 
+0045:  GOTO   03E
+.................... } 
+....................  
+....................  
+0046:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F3D   XT WDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

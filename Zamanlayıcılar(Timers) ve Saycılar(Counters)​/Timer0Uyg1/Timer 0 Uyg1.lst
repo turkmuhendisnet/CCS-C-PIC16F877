@@ -1,0 +1,246 @@
+CCS PCM C Compiler, Version 4.068, 61971               11-Mar-19 14:05
+
+               Filename: C:\Users\Ali ÇAKIR\Desktop\Wordpress\Pic Programlama\LED Yakma\-Zamnlayýcýlar\Timer0\Timer0Uyg1\Timer 0 Uyg1.lst
+
+               ROM used: 163 words (2%)
+                         Largest free fragment is 2048
+               RAM used: 17 (5%) at main() level
+                         18 (5%) worst case
+               Stack:    2 worst case (1 in main + 1 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   059
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  MOVF   7B,W
+0016:  MOVWF  27
+0017:  BCF    03.7
+0018:  BCF    03.5
+0019:  BTFSS  0B.5
+001A:  GOTO   01D
+001B:  BTFSC  0B.2
+001C:  GOTO   030
+001D:  MOVF   22,W
+001E:  MOVWF  04
+001F:  MOVF   23,W
+0020:  MOVWF  77
+0021:  MOVF   24,W
+0022:  MOVWF  78
+0023:  MOVF   25,W
+0024:  MOVWF  79
+0025:  MOVF   26,W
+0026:  MOVWF  7A
+0027:  MOVF   27,W
+0028:  MOVWF  7B
+0029:  MOVF   20,W
+002A:  MOVWF  0A
+002B:  SWAPF  21,W
+002C:  MOVWF  03
+002D:  SWAPF  7F,F
+002E:  SWAPF  7F,W
+002F:  RETFIE
+0030:  BCF    0A.3
+0031:  BCF    0A.4
+0032:  GOTO   033
+.................... #include <16F877.h> 
+.................... //////// Standard Header file for the PIC16F877 device //////////////// 
+.................... #device PIC16F877 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT              //Watch Dog Timer Kullanma 
+.................... #FUSES XT                 //Kristal  Osilatör ile CLKOUT 
+.................... #FUSES NOPUT              //Power Up Timer Kullanma 
+.................... #FUSES NOPROTECT          //Rom'a Yazýlan Veriler Okunabilir 
+.................... #FUSES NOBROWNOUT         //Brownout Reset Kullanma 
+.................... #FUSES NOLVP              //Düþük Gerilimler ile Programlamayý Kapt 
+.................... #FUSES NOCPD              //Data EEPROM Korumasýz 
+.................... #FUSES NOWRT              //Program Belleði Yazmaya Açýk 
+.................... #FUSES NODEBUG            //ICD için Hata Ayýklama Modu Kapalý 
+....................  
+.................... #use delay(clock=4000000) 
+*
+0042:  MOVLW  2B
+0043:  MOVWF  04
+0044:  BCF    03.7
+0045:  MOVF   00,W
+0046:  BTFSC  03.2
+0047:  GOTO   056
+0048:  MOVLW  01
+0049:  MOVWF  78
+004A:  CLRF   77
+004B:  DECFSZ 77,F
+004C:  GOTO   04B
+004D:  DECFSZ 78,F
+004E:  GOTO   04A
+004F:  MOVLW  4A
+0050:  MOVWF  77
+0051:  DECFSZ 77,F
+0052:  GOTO   051
+0053:  GOTO   054
+0054:  DECFSZ 00,F
+0055:  GOTO   048
+0056:  BCF    0A.3
+0057:  BCF    0A.4
+0058:  GOTO   09B (RETURN)
+....................  
+.................... #use fast_io(b) 
+....................  
+.................... #int_timer0 NOCLEAR 
+....................  
+.................... int i=0; 
+*
+0062:  BCF    03.5
+0063:  CLRF   28
+....................  
+.................... #int_timer0 
+.................... void timer0_kesme() 
+.................... { 
+....................    set_timer0(60); 
+*
+0033:  MOVLW  3C
+0034:  MOVWF  01
+....................    i++; 
+0035:  INCF   28,F
+....................    if(i==10) 
+0036:  MOVF   28,W
+0037:  SUBLW  0A
+0038:  BTFSC  03.2
+....................       output_high(pin_b0); 
+0039:  BSF    06.0
+....................    if(i==20) 
+003A:  MOVF   28,W
+003B:  SUBLW  14
+003C:  BTFSC  03.2
+....................       output_low(pin_b0); 
+003D:  BCF    06.0
+.................... } 
+....................  
+003E:  BCF    0B.2
+003F:  BCF    0A.3
+0040:  BCF    0A.4
+0041:  GOTO   01D
+.................... void main() 
+.................... { 
+*
+0059:  CLRF   04
+005A:  BCF    03.7
+005B:  MOVLW  1F
+005C:  ANDWF  03,F
+005D:  BSF    03.5
+005E:  BSF    1F.0
+005F:  BSF    1F.1
+0060:  BSF    1F.2
+0061:  BCF    1F.3
+....................    setup_psp(PSP_DISABLED); 
+*
+0066:  BSF    03.5
+0067:  BCF    09.4
+....................    setup_adc_ports(NO_ANALOGS); 
+0068:  BSF    1F.0
+0069:  BSF    1F.1
+006A:  BSF    1F.2
+006B:  BCF    1F.3
+....................    setup_adc(ADC_OFF);  
+006C:  BCF    03.5
+006D:  BCF    1F.0
+....................    setup_timer_1(T1_DISABLED); 
+006E:  CLRF   10
+....................    setup_timer_2(T2_DISABLED,0,1); 
+006F:  MOVLW  00
+0070:  MOVWF  78
+0071:  MOVWF  12
+0072:  MOVLW  00
+0073:  BSF    03.5
+0074:  MOVWF  12
+....................    setup_CCP1(CCP_OFF); 
+0075:  BCF    03.5
+0076:  BSF    29.2
+0077:  MOVF   29,W
+0078:  BSF    03.5
+0079:  MOVWF  07
+007A:  BCF    03.5
+007B:  CLRF   17
+....................    setup_CCP2(CCP_OFF);  
+007C:  BSF    29.1
+007D:  MOVF   29,W
+007E:  BSF    03.5
+007F:  MOVWF  07
+0080:  BCF    03.5
+0081:  CLRF   1D
+....................   
+....................    set_tris_b(0x00); 
+0082:  MOVLW  00
+0083:  BSF    03.5
+0084:  MOVWF  06
+....................     
+....................    output_b(0x00); 
+0085:  BCF    03.5
+0086:  CLRF   06
+....................    set_timer0(60); 
+0087:  MOVLW  3C
+0088:  MOVWF  01
+.................... setup_timer_0(RTCC_INTERNAL | RTCC_DIV_256); 
+0089:  BSF    03.5
+008A:  MOVF   01,W
+008B:  ANDLW  C0
+008C:  IORLW  07
+008D:  MOVWF  01
+.................... disable_interrupts(int_timer0); 
+008E:  BCF    03.5
+008F:  BCF    0B.5
+....................  
+....................    if(interrupt_active(int_timer0)){ 
+0090:  BTFSS  0B.2
+0091:  GOTO   09D
+....................        
+....................       enable_interrupts (int_timer0); 
+0092:  BSF    0B.5
+....................       enable_interrupts (GLOBAL); 
+0093:  MOVLW  C0
+0094:  IORWF  0B,F
+....................       output_low(pin_b1); 
+0095:  BCF    06.1
+....................       delay_ms(1000);} 
+0096:  MOVLW  04
+0097:  MOVWF  2A
+0098:  MOVLW  FA
+0099:  MOVWF  2B
+009A:  GOTO   042
+009B:  DECFSZ 2A,F
+009C:  GOTO   098
+....................       enable_interrupts (int_timer0); 
+009D:  BSF    0B.5
+....................       enable_interrupts (GLOBAL); 
+009E:  MOVLW  C0
+009F:  IORWF  0B,F
+....................       output_high(pin_b1); 
+00A0:  BSF    06.1
+....................  
+....................    while(1); 
+00A1:  GOTO   0A1
+.................... } 
+....................  
+....................  
+00A2:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG

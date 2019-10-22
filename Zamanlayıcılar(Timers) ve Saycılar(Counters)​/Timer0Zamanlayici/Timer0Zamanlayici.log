@@ -1,0 +1,12 @@
+0	1	mikroCPIC1618.exe -MSF -DBG -pP16F628A -DL -O11111114 -fo4 -N"E:\Mikroc\ornek\Web_Blog\Timer0Zamanlayici\Timer0Zamanlayici.mcppi" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Uses\P16\" -SP"E:\Mikroc\ornek\Web_Blog\Timer0Zamanlayici\" "Timer0Zamanlayici.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
+hint: 0	1139	Available RAM: 208 [bytes], Available ROM: 2048 [bytes]	 
+diagnostics: 0	126	All files Preprocessed in 63 ms	 
+diagnostics: 0	122	Compilation Started	Timer0Zamanlayici.c
+diagnostics: 52	123	Compiled Successfully	Timer0Zamanlayici.c
+diagnostics: 0	127	All files Compiled in 156 ms	 
+hint: 0	1144	Used RAM (bytes): 8 (4%)  Free RAM (bytes): 200 (96%)	Used RAM (bytes): 8 (4%)  Free RAM (bytes): 200 (96%)
+hint: 0	1144	Used ROM (program words): 92 (4%)  Free ROM (program words): 1956 (96%)	Used ROM (program words): 92 (4%)  Free ROM (program words): 1956 (96%)
+diagnostics: 0	125	Project Linked Successfully	Timer0Zamanlayici.mcppi
+diagnostics: 0	128	Linked in 47 ms	 
+diagnostics: 0	129	Project 'Timer0Zamanlayici.mcppi' completed: 312 ms	 
+diagnostics: 0	103	Finished successfully: 12 Kas 2013, 22:07:03	Timer0Zamanlayici.mcppi

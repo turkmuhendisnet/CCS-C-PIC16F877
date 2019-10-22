@@ -1,0 +1,6 @@
+main
+	__CC2DW
+		____DoICP
+	kurulum
+		InitTimer0
+Interrupt
